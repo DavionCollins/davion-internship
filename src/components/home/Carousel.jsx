@@ -16,9 +16,7 @@ const Carousel = () => {
         "https://us-central1-nft-cloud-functions.cloudfunctions.net/hotCollections",
       );
       setNfts(data);
-      setTimeout(() => {
-        setLoading(false);
-      }, 3000);
+      setLoading(false);
     } catch (error) {
       console.error("Error loading NFTs:", error);
       setLoading(false);

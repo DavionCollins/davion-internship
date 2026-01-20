@@ -13,18 +13,18 @@ const Home = () => {
   }, []);
 
   const [nfts, setNfts] = useState([]);
+
+  async function getNfts() {
+    const { data } = await axios.get(
+      "https://us-central1-nft-cloud-functions.cloudfunctions.net/hotCollections",
+    );
+    setNfts(data);
+  }
+
   
-    async function getNfts() {
-      const { data } = await axios.get(
-        "https://us-central1-nft-cloud-functions.cloudfunctions.net/hotCollections",
-      );
-      setNfts(data);
-    }
-  
-    useEffect(() => {
-      getNfts();
-    }, []);
-  
+  useEffect(() => {
+    getNfts();
+  }, []);
 
   return (
     <div id="wrapper">
@@ -32,7 +32,7 @@ const Home = () => {
         <div id="top"></div>
         <Landing />
         <LandingIntro />
-        <HotCollections nfts={nfts}/>
+        <HotCollections nfts={nfts} />
         <NewItems />
         <TopSellers />
         <BrowseByCategory />

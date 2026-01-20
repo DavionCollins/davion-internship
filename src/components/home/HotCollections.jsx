@@ -5,7 +5,7 @@ import nftImage from "../../images/nftImage.jpg";
 import axios from "axios";
 import Carousel from "./Carousel";
 
-const HotCollections = ({nfts}) => {
+const HotCollections = () => {
   
 
   return (
