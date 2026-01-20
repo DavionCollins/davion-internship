@@ -1,11 +1,28 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import SubHeader from "../images/subheader.jpg";
 import ExploreItems from "../components/explore/ExploreItems";
+import axios from "axios";
 
 const Explore = () => {
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
+
+  const [exploreItems, setExploreItems] = useState([]);
+  const [filter, setFilter] = useState("");
+  const [loading, setLoading] = useState(true);
+
+  async function getItems(value = "") {
+    const { data } = await axios.get(
+      `https://us-central1-nft-cloud-functions.cloudfunctions.net/explore?filter=${value}`,
+    );
+    setExploreItems(data);
+    setLoading(false);
+  }
+
+  useEffect(() => {
+    getItems(filter);
+  }, [filter]);
 
   return (
     <div id="wrapper">
@@ -32,7 +49,11 @@ const Explore = () => {
         <section aria-label="section">
           <div className="container">
             <div className="row">
-              <ExploreItems />
+              <ExploreItems
+                exploreItems={exploreItems}
+                onFilterChange={setFilter}
+                loading={loading}
+              />
             </div>
           </div>
         </section>

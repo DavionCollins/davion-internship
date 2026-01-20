@@ -13,7 +13,6 @@ const Home = () => {
   }, []);
 
   const [nfts, setNfts] = useState([]);
-  
 
   async function getNfts() {
     const { data } = await axios.get(
@@ -22,7 +21,6 @@ const Home = () => {
     setNfts(data);
   }
 
-  
   useEffect(() => {
     getNfts();
   }, []);
