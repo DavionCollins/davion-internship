@@ -1,8 +1,5 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import AuthorImage from "../../images/author_thumbnail.jpg";
-import nftImage from "../../images/nftImage.jpg";
-import Expiration from "../home/Expiration";
 import NFTCard from "../UI/NFTCard";
 import NFTCardSkeleton from "../UI/NFTCardSkeleton";
 
