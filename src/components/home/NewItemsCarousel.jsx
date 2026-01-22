@@ -105,7 +105,7 @@ const NewItemsCarousel = () => {
             <div className="nft__item">
               <div className="author_list_pp">
                 <Link
-                  to="/author"
+                  to={`/author/${newItem.authorId}`}
                   data-bs-toggle="tooltip"
                   data-bs-placement="top"
                   title="Creator: Monica Lucas"
@@ -137,7 +137,7 @@ const NewItemsCarousel = () => {
                   </div>
                 </div>
 
-                <Link to="/item-details">
+                <Link to={`/item-details/${newItem.nftId}`}>
                   <img
                     src={newItem.nftImage}
                     className="lazy nft__item_preview"
@@ -146,7 +146,7 @@ const NewItemsCarousel = () => {
                 </Link>
               </div>
               <div className="nft__item_info">
-                <Link to="/item-details">
+                <Link to={`/item-details/${newItem.nftId}`}>
                   <h4>{newItem.title}</h4>
                 </Link>
                 <div className="nft__item_price">{newItem.price} ETH</div>

@@ -9,6 +9,8 @@ const NFTCard = ({
   authorImage,
   expiryDate,
   likes,
+  nftId,
+  authorId
 }) => {
   return (
     <div
@@ -17,7 +19,7 @@ const NFTCard = ({
     >
       <div className="nft__item">
         <div className="author_list_pp">
-          <Link to="/author" data-bs-toggle="tooltip" data-bs-placement="top">
+          <Link to={`/author/${authorId}`} data-bs-toggle="tooltip" data-bs-placement="top">
             <img className="lazy" src={authorImage} alt="" />
             <i className="fa fa-check"></i>
           </Link>
@@ -44,12 +46,12 @@ const NFTCard = ({
               </div>
             </div>
           </div>
-          <Link to="/item-details">
+          <Link to={`/item-details/${nftId}`}>
             <img src={nftImage} className="lazy nft__item_preview" alt="" />
           </Link>
         </div>
         <div className="nft__item_info">
-          <Link to="/item-details">
+          <Link to={`/item-details/${nftId}`}>
             <h4>{title}</h4>
           </Link>
           <div className="nft__item_price">{price} ETH</div>

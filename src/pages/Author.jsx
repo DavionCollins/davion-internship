@@ -1,11 +1,38 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import AuthorBanner from "../images/author_banner.jpg";
 import AuthorItems from "../components/author/AuthorItems";
 import { Link, useParams } from "react-router-dom";
-import AuthorImage from "../images/author_thumbnail.jpg";
+import axios from "axios";
+import Skeleton from "../components/UI/Skeleton";
 
 const Author = () => {
-  const { authorId } = useParams()
+  const [author, setAuthor] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const { authorId } = useParams();
+  const [isFollowing, setisFollowing] = useState(false);
+  const [followerCount, setFollowerCount] = useState(0);
+
+  async function getAuthor() {
+    const { data } = await axios.get(
+      `https://us-central1-nft-cloud-functions.cloudfunctions.net/authors?author=${authorId}`,
+    );
+    setAuthor(data);
+    setFollowerCount(data.followers);
+    setLoading(false);
+  }
+
+  function changeFollowing() {
+    setisFollowing(!isFollowing);
+    if (!isFollowing) {
+      setFollowerCount(followerCount + 1);
+    } else {
+      setFollowerCount(followerCount - 1);
+    }
+  }
+
+  useEffect(() => {
+    getAuthor();
+  }, [authorId]);
 
   return (
     <div id="wrapper">
@@ -27,29 +54,68 @@ const Author = () => {
                 <div className="d_profile de-flex">
                   <div className="de-flex-col">
                     <div className="profile_avatar">
-                      <img src={AuthorImage} alt="" />
+                      {loading ? (
+                        <Skeleton
+                          width="150px"
+                          height="150px"
+                          borderRadius="50%"
+                        />
+                      ) : (
+                        <img src={author.authorImage} alt="" />
+                      )}
 
                       <i className="fa fa-check"></i>
                       <div className="profile_name">
                         <h4>
-                          Monica Lucas
-                          <span className="profile_username">@monicaaaa</span>
-                          <span id="wallet" className="profile_wallet">
-                            UDHUHWudhwd78wdt7edb32uidbwyuidhg7wUHIFUHWewiqdj87dy7
-                          </span>
-                          <button id="btn_copy" title="Copy Text">
-                            Copy
-                          </button>
+                          {loading ? (
+                            <>
+                              <Skeleton width="200px" height="24px" />
+                              <span className="profile_username">
+                                <Skeleton width="100px" height="16px" />
+                              </span>
+                              <span id="wallet" className="profile_wallet">
+                                <Skeleton width="250px" height="16px" />
+                              </span>
+                            </>
+                          ) : (
+                            <>
+                              {author.authorName}
+                              <span className="profile_username">
+                                {author.tag}
+                              </span>
+                              <span id="wallet" className="profile_wallet">
+                                {author.address}
+                              </span>
+                              <button id="btn_copy" title="Copy Text">
+                                Copy
+                              </button>
+                            </>
+                          )}
                         </h4>
                       </div>
                     </div>
                   </div>
                   <div className="profile_follow de-flex">
                     <div className="de-flex-col">
-                      <div className="profile_follower">573 followers</div>
-                      <Link to="#" className="btn-main">
-                        Follow
-                      </Link>
+                      {loading ? (
+                        <>
+                          (<Skeleton width="60px" height="24px" />
+                          <Skeleton width="100px" height="40px" />){" "}
+                        </>
+                      ) : (
+                        <>
+                          <div className="profile_follower">
+                            {followerCount}
+                          </div>
+                          <Link
+                            to="#"
+                            className="btn-main"
+                            onClick={changeFollowing}
+                          >
+                            {isFollowing ? "unfollow" : "Follow"}
+                          </Link>
+                        </>
+                      )}
                     </div>
                   </div>
                 </div>
@@ -57,7 +123,7 @@ const Author = () => {
 
               <div className="col-md-12">
                 <div className="de_tab tab_simple">
-                  <AuthorItems />
+                  <AuthorItems author={author} loading={loading} />
                 </div>
               </div>
             </div>
