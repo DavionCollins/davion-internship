@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import OwlCarousel from "react-owl-carousel";
 import "owl.carousel/dist/assets/owl.carousel.css";
 import "owl.carousel/dist/assets/owl.theme.default.css";
@@ -10,22 +10,31 @@ import Expiration from "./Expiration";
 const NewItemsCarousel = () => {
   const [newItems, setNewItems] = useState([]);
   const [loading, setLoading] = useState(true);
-
-  async function getNewItems() {
-    try {
-      const { data } = await axios.get(
-        "https://us-central1-nft-cloud-functions.cloudfunctions.net/newItems",
-      );
-      setNewItems(data);
-      setLoading(false);
-    } catch (error) {
-      console.error("Error loading NFTs:", error);
-      setLoading(false);
-    }
-  }
-
+  const abortControllerRef = useRef(null);
   useEffect(() => {
+    const getNewItems = async () => {
+      abortControllerRef.current = new AbortController();
+
+      try {
+        const { data } = await axios.get(
+          "https://us-central1-nft-cloud-functions.cloudfunctions.net/newItems",
+          { signal: abortControllerRef.current.signal },
+        );
+        setNewItems(data);
+        setLoading(false);
+      } catch (error) {
+        console.error("Error loading NFTs:", error);
+        setLoading(false);
+      }
+    };
+
     getNewItems();
+
+    return () => {
+      if (abortControllerRef.current) {
+        abortControllerRef.current.abort();
+      }
+    };
   }, []);
 
   const options = {
@@ -59,24 +68,7 @@ const NewItemsCarousel = () => {
     },
   };
 
-  if (loading) {
-    return (
-      <div className="skeleton__carousel">
-        {[1, 2, 3, 4].map((item) => (
-          <div key={item} className="skelton__item">
-            <div className="nft_coll skeleton">
-              <div className="nft_wrap skeleton__image"></div>
-              <div className="nft_coll_pp skeleton__avatar"></div>
-              <div className="nft_coll_info skeleton">
-                <div className="skeleton__title"></div>
-                <div className="skeleton__text"></div>
-              </div>
-            </div>
-          </div>
-        ))}
-      </div>
-    );
-  }
+ 
 
   if (loading) {
     return (
@@ -99,9 +91,10 @@ const NewItemsCarousel = () => {
 
   return (
     <div>
-      <OwlCarousel className="owl-theme" key={newItems.length} {...options}>
+      {loading && newItems.length > 0 && (
+      <OwlCarousel className="owl-theme" {...options}>
         {newItems.map((newItem, index) => (
-          <div key={index}>
+          <div key={`${newItem.nftId}-${index}`}>
             <div className="nft__item">
               <div className="author_list_pp">
                 <Link
@@ -124,15 +117,15 @@ const NewItemsCarousel = () => {
                     <button>Buy Now</button>
                     <div className="nft__item_share">
                       <h4>Share</h4>
-                      <a href="" target="_blank" rel="noreferrer">
+                      <button target="_blank" rel="noreferrer">
                         <i className="fa fa-facebook fa-lg"></i>
-                      </a>
-                      <a href="" target="_blank" rel="noreferrer">
+                      </button>
+                      <button target="_blank" rel="noreferrer">
                         <i className="fa fa-twitter fa-lg"></i>
-                      </a>
-                      <a href="">
+                      </button>
+                      <button>
                         <i className="fa fa-envelope fa-lg"></i>
-                      </a>
+                      </button>
                     </div>
                   </div>
                 </div>
@@ -159,6 +152,7 @@ const NewItemsCarousel = () => {
           </div>
         ))}
       </OwlCarousel>
+      )}
     </div>
   );
 };

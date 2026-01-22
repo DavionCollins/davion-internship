@@ -16,14 +16,26 @@ const Author = () => {
   const [isFollowing, setisFollowing] = useState(false);
   const [followerCount, setFollowerCount] = useState(0);
 
-  async function getAuthor() {
+  useEffect(() => {
+  const getAuthor = async () =>  {
+    try {
     const { data } = await axios.get(
       `https://us-central1-nft-cloud-functions.cloudfunctions.net/authors?author=${authorId}`,
     );
+  
     setAuthor(data);
     setFollowerCount(data.followers);
     setLoading(false);
+  }catch (error) {
+    console.log("Error loading author:", error)
+    setLoading(false)
   }
+    
+  }
+
+   
+    getAuthor();
+  }, [authorId]);
 
   function changeFollowing() {
     setisFollowing(!isFollowing);
@@ -34,9 +46,7 @@ const Author = () => {
     }
   }
 
-  useEffect(() => {
-    getAuthor();
-  }, [authorId]);
+ 
 
   return (
     <div id="wrapper">
