@@ -1,3 +1,5 @@
+import Aos from "aos";
+import 'aos/dist/aos.css'
 import React from "react";
 import ReactDOM from "react-dom";
 import "./index.css";
@@ -6,6 +8,9 @@ import reportWebVitals from "./reportWebVitals";
 import $ from "jquery";
 window.$ = window.jQuery = $;
 
+
+
+Aos.init()
 ReactDOM.render(
   <React.StrictMode>
     <App />
