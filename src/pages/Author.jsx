@@ -6,6 +6,10 @@ import axios from "axios";
 import Skeleton from "../components/UI/Skeleton";
 
 const Author = () => {
+  useEffect(() => {
+    window.scrollTo(0,0)
+  },[])
+  
   const [author, setAuthor] = useState(null);
   const [loading, setLoading] = useState(true);
   const { authorId } = useParams();
