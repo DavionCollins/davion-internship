@@ -82,7 +82,7 @@ const Carousel = () => {
       <OwlCarousel className="owl-theme" key={nfts.length} {...options}>
         {nfts.map((nft, index) => (
           <div key={index}>
-            <div className="nft_coll">
+            <div data-aos="fade-up" className="nft_coll">
               <div className="nft_wrap">
                 <Link to={`/item-details/${nft.nftId}`}>
                   <img src={nft.nftImage} className="lazy img-fluid" alt="" />
