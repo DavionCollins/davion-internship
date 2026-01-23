@@ -91,7 +91,7 @@ const NewItemsCarousel = () => {
 
   return (
     <div>
-      {loading && newItems.length > 0 && (
+      {!loading && newItems.length > 0 && (
       <OwlCarousel className="owl-theme" {...options}>
         {newItems.map((newItem, index) => (
           <div key={`${newItem.nftId}-${index}`}>
