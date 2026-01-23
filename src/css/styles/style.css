@@ -537,8 +537,9 @@ header .header-col.mid .social-icons {
 #profile_banner {
   min-height: 360px;
   height: 360px;
-  background-size: cover;
-  background-position: center top;
+  background-size: cover !important;
+  background-position: center top !important;
+  background-repeat: no-repeat !important;
 }
 
 /* ================================================== */

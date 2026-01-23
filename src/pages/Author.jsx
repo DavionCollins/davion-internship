@@ -56,14 +56,7 @@ const Author = () => {
           className="text-light"
           data-bgimage="url(images/author_banner.jpg) top"
           style={{
-            backgroundImage: `url(${AuthorBanner}) `,
-            backgroundPosition: `center top `,
-            backgroundSize: `cover `,
-            backgroundRepeat: `no-repeat `,
-            height: `360px `,
-            width: `100% `,
-            display: `block `,
-            minHeight: `300px`,
+            backgroundImage: `url(${AuthorBanner}) `
           }}
         ></section>
 
