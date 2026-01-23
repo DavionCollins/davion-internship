@@ -1,15 +1,15 @@
 import React, { useEffect, useState } from "react";
 import AuthorItems from "../components/author/AuthorItems";
-import AuthorBanner from '../images/author_banner.jpg'
+import AuthorBanner from "../images/author_banner.jpg";
 import { Link, useParams } from "react-router-dom";
 import axios from "axios";
 import Skeleton from "../components/UI/Skeleton";
 
 const Author = () => {
   useEffect(() => {
-    window.scrollTo(0,0)
-  },[])
-  
+    window.scrollTo(0, 0);
+  }, []);
+
   const [author, setAuthor] = useState(null);
   const [loading, setLoading] = useState(true);
   const { authorId } = useParams();
@@ -17,23 +17,22 @@ const Author = () => {
   const [followerCount, setFollowerCount] = useState(0);
 
   useEffect(() => {
-  const getAuthor = async () =>  {
-    try {
-    const { data } = await axios.get(
-      `https://us-central1-nft-cloud-functions.cloudfunctions.net/authors?author=${authorId}`,
-    );
-  
-    setAuthor(data);
-    setFollowerCount(data.followers);
-    setLoading(false);
-  }catch (error) {
-    console.log("Error loading author:", error)
-    setLoading(false)
-  }
-    
-  }
+    console.log("Banner image path:", AuthorBanner);
+    const getAuthor = async () => {
+      try {
+        const { data } = await axios.get(
+          `https://us-central1-nft-cloud-functions.cloudfunctions.net/authors?author=${authorId}`,
+        );
 
-   
+        setAuthor(data);
+        setFollowerCount(data.followers);
+        setLoading(false);
+      } catch (error) {
+        console.log("Error loading author:", error);
+        setLoading(false);
+      }
+    };
+
     getAuthor();
   }, [authorId]);
 
@@ -46,8 +45,6 @@ const Author = () => {
     }
   }
 
- 
-
   return (
     <div id="wrapper">
       <div className="no-bottom no-top" id="content">
@@ -58,7 +55,12 @@ const Author = () => {
           aria-label="section"
           className="text-light"
           data-bgimage="url(images/author_banner.jpg) top"
-          style={{ background: `url(${AuthorBanner}) top` }}
+          style={{
+            backgroundImage: `url(${AuthorBanner})`,
+            backgroundPosition: `top`,
+            backgroundSize: `cover`,
+            minHeight: `300px`,
+          }}
         ></section>
 
         <section aria-label="section">
