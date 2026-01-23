@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import AuthorItems from "../components/author/AuthorItems";
-import AuthorBanner from "../images/author_banner.jpg";
 import { Link, useParams } from "react-router-dom";
 import axios from "axios";
 import Skeleton from "../components/UI/Skeleton";
@@ -17,7 +16,6 @@ const Author = () => {
   const [followerCount, setFollowerCount] = useState(0);
 
   useEffect(() => {
-    console.log("Banner image path:", AuthorBanner);
     const getAuthor = async () => {
       try {
         const { data } = await axios.get(
@@ -52,7 +50,7 @@ const Author = () => {
 
         <section id="profile_banner">
           <img
-            src={AuthorBanner}
+            src='/author_banner.jpg'
             style={{
               width: "100%",
               height: "350px",
