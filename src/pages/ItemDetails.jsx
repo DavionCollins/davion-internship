@@ -5,13 +5,13 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 import Skeleton from "../components/UI/Skeleton";
 
-const ItemDetails = () => {
+const ItemDetails = ({nftId}) => {
   const [itemDetails, setItemDetails] = useState(null);
   const [loading, setLoading] = useState(true);
 
   async function getItemDetails() {
     const { data } = await axios.get(
-      "https://us-central1-nft-cloud-functions.cloudfunctions.net/itemDetails?nftId=17914494",
+      `https://us-central1-nft-cloud-functions.cloudfunctions.net/itemDetails?nftId=${nftId}`,
     );
     setItemDetails(data);
     setLoading(false);
