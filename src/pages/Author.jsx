@@ -54,7 +54,6 @@ const Author = () => {
           id="profile_banner"
           aria-label="section"
           className="text-light"
-          data-bgimage="url(images/author_banner.jpg) top"
           style={{
             backgroundImage: `url(${AuthorBanner}) `
           }}
