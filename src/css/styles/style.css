@@ -13677,12 +13677,12 @@ a.read_more i {
 
 .nft__item_wrap a {
   display: block;
-  width: 100%;
+  width: 90%;
 }
 
 .nft__item img {
-  width: 100%;
-  height: auto !important;
+  width: 85%;
+  height: 85% !important;
   border-radius: 8px;
   -moz-border-radius: 8px;
   -webkit-border-radius: 8px;
