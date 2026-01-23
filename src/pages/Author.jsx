@@ -135,7 +135,7 @@ const Author = () => {
 
               <div className="col-md-12">
                 <div className="de_tab tab_simple">
-                  <AuthorItems author={author} loading={loading} />
+                  { author && <AuthorItems author={author} loading={loading} />}
                 </div>
               </div>
             </div>
