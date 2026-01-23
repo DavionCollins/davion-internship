@@ -3,7 +3,7 @@ import NewItemsCarousel from "./NewItemsCarousel";
 
 const NewItems = () => {
   return (
-    <section id="section-items" className="no-bottom">
+    <section id="section-items" >
       <div className="container">
         <div data-aos="fade-up" className="row">
           <div className="col-lg-12">

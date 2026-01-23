@@ -53,15 +53,23 @@ const NewItemsCarousel = () => {
         items: 1,
         nav: true,
       },
-      600: {
+      800: {
+        items: 1,
+        nav: true,
+      },
+      850: {
         items: 2,
         nav: true,
       },
-      800: {
-        items: 3,
+      1000: {
+        items: 2,
         nav: true,
       },
-      1240: {
+      1150: {
+        items: 3,
+        nav: true
+      },
+      1300: {
         items: 4,
         nav: true,
       },

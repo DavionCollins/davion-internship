@@ -15,6 +15,8 @@ const Author = () => {
   const [isFollowing, setisFollowing] = useState(false);
   const [followerCount, setFollowerCount] = useState(0);
 
+  
+
   useEffect(() => {
     const getAuthor = async () => {
       try {
@@ -33,6 +35,10 @@ const Author = () => {
 
     getAuthor();
   }, [authorId]);
+
+  function alertCopy() {
+    alert('Address Copied')
+  }
 
   function changeFollowing() {
     setisFollowing(!isFollowing);
@@ -98,7 +104,7 @@ const Author = () => {
                               <span id="wallet" className="profile_wallet">
                                 {author.address}
                               </span>
-                              <button id="btn_copy" title="Copy Text">
+                              <button onClick={alertCopy} id="btn_copy" title="Copy Text">
                                 Copy
                               </button>
                             </>

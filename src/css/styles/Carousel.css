@@ -5,6 +5,8 @@
     padding: 20px 0;
 }
 
+
+
 @media (max-width: 1240px) {
   .skeleton__carousel {
     grid-template-columns: repeat(3, 1fr);

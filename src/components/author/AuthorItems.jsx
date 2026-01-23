@@ -13,7 +13,7 @@ const AuthorItems = ({ author, loading }) => {
               ? new Array(8).fill(0).map((_, index) => <NFTCardSkeleton key={index}/>)
               : author.nftCollection.map((nft, index) => (
                   <div
-                    className="col-lg-3 col-md-6 col-sm-6 col-xs-12"
+                    className="col-lg-3  "
                   key={index}>
                     <div className="nft__item">
                       <div className="author_list_pp">
