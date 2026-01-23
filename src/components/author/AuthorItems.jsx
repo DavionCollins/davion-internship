@@ -15,6 +15,7 @@ const AuthorItems = ({ author, loading }) => {
                   <div
                     className="col-lg-3  "
                   key={index}>
+                    
                     <div className="nft__item">
                       <div className="author_list_pp">
                         <Link to="">

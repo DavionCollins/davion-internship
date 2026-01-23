@@ -882,7 +882,7 @@ header:not(.header-mobile) #mainmenu > li:hover ul.mega {
   color: white;
 }
 
-@media (max-width: 991px) {
+@media (max-width: 990px) {
   #mainmenu {
     display: none;
   }
@@ -14317,6 +14317,11 @@ a.read_more i {
   -moz-border-radius: 3px;
   -webkit-border-radius: 3px;
   outline: none;
+}
+
+#btn_copy:active {
+  transform: translateY(5%);
+  filter: invert();
 }
 
 .dark-scheme #btn_copy {
