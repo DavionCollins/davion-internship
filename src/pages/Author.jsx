@@ -50,14 +50,16 @@ const Author = () => {
       <div className="no-bottom no-top" id="content">
         <div id="top"></div>
 
-        <section
-          id="profile_banner"
-          aria-label="section"
-          className="text-light"
-          style={{
-            backgroundImage: `url(${AuthorBanner}) `
-          }}
-        ></section>
+        <section id="profile_banner">
+          <img
+            src={AuthorBanner}
+            style={{
+              width: "100%",
+              height: "350px",
+              objectFit: "cover",
+            }}
+          />
+        </section>
 
         <section aria-label="section">
           <div className="container">

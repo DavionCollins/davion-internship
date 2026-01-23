@@ -1221,8 +1221,8 @@ header.header-mobile.header-light #menu-btn {
 /* ================================================== */
 
 section {
-  padding: 90px 0 90px 0;
   position: relative;
+  margin-bottom: 30px 
 }
 
 .dark-scheme section {
