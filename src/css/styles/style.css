@@ -13673,6 +13673,7 @@ a.read_more i {
   justify-content: center;
   position: relative;
   height: 350px;
+  overflow: hidden;
 }
 
 .nft__item_wrap a {
@@ -13686,6 +13687,7 @@ a.read_more i {
   border-radius: 8px;
   -moz-border-radius: 8px;
   -webkit-border-radius: 8px;
+  border-radius: 20%;
 }
 
 .nft__item .author_list_pp {
